@@ -68,6 +68,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
 }
 handler.help = ['jadibot']
 handler.tags = ['jadibot']
+handler.rowner = true
 
 handler.command = /^jadibot$/i
 

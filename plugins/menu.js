@@ -4,6 +4,7 @@ let levelling = require('../lib/levelling')
 let tags = {
   'main': 'Main',
   'game': 'Game',
+  'anime' : 'Anime',
   'xp': 'Exp & Limit',
   'sticker': 'Sticker',
   'kerang': 'Kerang Ajaib',
@@ -28,7 +29,7 @@ let tags = {
 }
 const defaultMenu = {
   before: `
-╭─「 %me 」
+╭─「 Hayasaka BOT 1.4 」
 │ Hai, %name!
 │
 │ Tersisa *%limit Limit*
@@ -40,22 +41,20 @@ const defaultMenu = {
 │ Waktu: *%time*
 │
 │ Uptime: *%uptime (%muptime)*
-│ Database: %rtotalreg of %totalreg
-│ Github:
-│ %github
 ╰────
 %readmore`.trimStart(),
   header: '╭─「 %category 」',
   body: '│ • %cmd %islimit %isPremium',
   footer: '╰────\n',
   after: `
-*%npmname@^%version*
-${'```%npmdesc```'}
+Kalau ada apa-apa chat owner ya 😘
+*Oni chan Saitee!*
 `,
 }
 let handler = async (m, { conn, usedPrefix: _p }) => {
   try {
     let package = JSON.parse(await fs.promises.readFile(path.join(__dirname, '../package.json')).catch(_ => '{}'))
+    let hayasaka = 'src/hayasaka.jpg'
     let { exp, limit, level } = global.DATABASE.data.users[m.sender]
     let { min, xp, max } = levelling.xpRange(level, global.multiplier)
     let name = conn.getName(m.sender)
@@ -148,7 +147,8 @@ let handler = async (m, { conn, usedPrefix: _p }) => {
       readmore: readMore
     }
     text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
-    conn.reply(m.chat, text.trim(), m)
+    //conn.reply(m.chat, text.trim(), m)
+    conn.sendFile(m.chat, hayasaka, 'hayasaka.jpg', text.trim(), { key: { remoteJid: 'status@broadcast', participant: '0@s.whatsapp.net', fromMe: false }, message: { "imageMessage": { "mimetype": "image/jpeg", "caption": ' *HAYASAKA BOT !!!*', "jpegThumbnail": fs.readFileSync('src/icon_hayasaka.jpg')} } }, m)
   } catch (e) {
     conn.reply(m.chat, 'Maaf, menu sedang error', m)
     throw e
