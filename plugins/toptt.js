@@ -6,7 +6,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     let mime = (m.quoted ? m.quoted : m.msg).mimetype || ''
     if (!/video|audio/.test(mime)) throw `Balas audio yang ingin diubah ke voice note dengan caption *${usedPrefix + command}*`
     let media = await q.download()
-    let audio = await toPTT(media, 'mp3')
+    let audio = await toPTT(media, 'opus')
     conn.sendMessage(m.chat, audio, MessageType.audio, {
         quoted: m,
         type: 'audioMessage',
