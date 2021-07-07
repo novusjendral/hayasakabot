@@ -9,6 +9,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     let audio = await toPTT(media, 'mp4')
     conn.sendMessage(m.chat, audio, MessageType.audio, {
         quoted: m,
+        type: 'audioMessage',
         ptt: true
     })
 }
