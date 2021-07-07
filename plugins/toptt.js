@@ -12,10 +12,6 @@ let handler = async (m, { conn, usedPrefix, command }) => {
       /*type: 'audioMessage',*/
       ptt: true
   })
-   //conn.sendfile(m.chat, audio, 'yamete.mp3', null, m, true, {
-   //     type: 'audiomessage', // paksa tanpa convert di ffmpeg
-   //     ptt: true // true diatas ga work, sebab dipaksa tanpa convert ;v
-   // })
 }
 handler.help = ['tovn']
 handler.tags = ['audio']
