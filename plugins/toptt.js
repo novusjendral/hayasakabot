@@ -8,13 +8,14 @@ let handler = async (m, { conn, usedPrefix, command }) => {
   let media = await q.download()
   let audio = await toPTT(media, 'mp3')
   conn.sendMessage(m.chat, audio, MessageType.audio, {
-    quoted: m,
+      quoted: m,
+      type: 'audioMessage',
     ptt: true
   })
-    conn.sendFile(m.chat, audio, 'yamete.mp3', null, m, true, {
-        type: 'audioMessage', // paksa tanpa convert di ffmpeg
-        ptt: true // true diatas ga work, sebab dipaksa tanpa convert ;v
-    })
+   //conn.sendfile(m.chat, audio, 'yamete.mp3', null, m, true, {
+   //     type: 'audiomessage', // paksa tanpa convert di ffmpeg
+   //     ptt: true // true diatas ga work, sebab dipaksa tanpa convert ;v
+   // })
 }
 handler.help = ['tovn']
 handler.tags = ['audio']
